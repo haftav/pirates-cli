@@ -1,0 +1,11 @@
+{
+  "name": "pirates-cli",
+  "version": "1.0.0",
+  "description": "A tale of trusty typing on the high seas",
+  "main": "index.js",
+  "author": "Tav Hafner",
+  "license": "MIT",
+  "dependencies": {
+    "inquirer": "^6.2.0"
+  }
+}
