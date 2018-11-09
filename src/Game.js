@@ -17,18 +17,17 @@ module.exports = class Game {
             if (action[0] === 'move') {
                 this.player.move(action[1], action[2]);
                 console.log('You decided to move.');
-                this.loop();
             } 
             else if (action[0] === 'invalid') {
                 console.log(action[1]);
-                this.loop()
             }
-            else if (action === 'end') {
-                this.end();
+            else if (action[0] === 'end') {
+                return this.end();
             } else {
                 console.log("I didn't quite catch that.\n");
-                this.loop();
             }
+            this.loop();
+
     }
 
     end() {

@@ -23,7 +23,7 @@ function parseAction(action) {
     }
     else if (action === 'end' || action === 'end game') {
         return [
-            'invalid'
+            'end'
         ];
     } else {
         return [
