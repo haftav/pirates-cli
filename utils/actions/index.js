@@ -1,4 +1,4 @@
-const parseAction = require('./parseAction');
+const { parseAction } = require('./parseAction');
 
 module.exports = {
     parseAction

@@ -6,7 +6,7 @@ function getAction() {
         {
             type: 'input',
             name: 'action',
-            message: 'What would you like to do?\n',
+            message: 'What would you like to do?',
             transformer: function(input, answers, flags) {
                 return input.toLowerCase();
             }

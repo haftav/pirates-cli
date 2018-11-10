@@ -1,5 +1,7 @@
 module.exports = class Area {
-    constructor(name) {
+    constructor({type, name}) {
+        this.type = type;
         this.name = name;
     }
 }
+
