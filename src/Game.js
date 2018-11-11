@@ -17,6 +17,7 @@ module.exports = class Game {
         console.log(JSON.stringify(this.area) + "\n");
 
         let action = await getAction();
+        // this.commandCenter(action[0])
         if (action[0] === 'move') {
             this.move(action[1], action[2])
         }
@@ -29,7 +30,6 @@ module.exports = class Game {
             console.log("\nI didn't quite catch that.\n");
         }
         this.loop();
-
     }
 
     move(index, direction) {
@@ -47,7 +47,6 @@ module.exports = class Game {
                     if (direction === 1) {
                         return false
                     }
-
                 }
             } else {
                 if (currentAreaX === 1) {
@@ -93,5 +92,22 @@ module.exports = class Game {
     end() {
         console.log('\nThank you for playing!');
         process.exit();
+    }
+
+    commandCenter(action) {
+        switch (action[0]) {
+            case 'help':
+                return this.instructions;
+            case 'invalid':
+                return console.log(action[1]);
+            case 'show score':
+                return;
+            case 'move':
+                return this.move(action[1], action[2])
+            case 'end':
+                return this.end();
+            default:
+                return console.log("\nI didn't quite catch that.\n");
+        }
     }
 };

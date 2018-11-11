@@ -8,7 +8,7 @@ function getAction() {
             name: 'action',
             message: 'What would you like to do?',
             transformer: function(input, answers, flags) {
-                return input.toLowerCase();
+                return input.toLowerCase().trim();
             }
         }
     ];

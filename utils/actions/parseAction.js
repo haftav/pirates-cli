@@ -8,7 +8,6 @@ parseMove = function parseMove(move) {
         return an array with the first item 
         as the action to take, the second as the index of the area code
         to modify, and the third as the direction to take
-
         **/
         return [
             'move',
@@ -28,7 +27,12 @@ parseAction = function parseAction(action) {
     if (action.match(moveRegex)) {
         return parseMove(action);
     }
-    else if (action === 'end' || action === 'end game') {
+    else if (action === 'h' || action === 'help') {
+        return [
+            'help'
+        ]
+    }
+    else if (action === 'end' || action === 'end game' || action === 'quit' || action === 'q') {
         return [
             'end'
         ];

@@ -5,5 +5,3 @@ module.exports = class Player {
     }
 
 }
-
-// fixed?
