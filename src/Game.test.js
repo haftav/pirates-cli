@@ -26,6 +26,7 @@ describe('Game.js tests', () => {
     test('check move method call on class instance', () => {
         const newGame = new Game(new Player('Tav', 'B2'), areaData, { type: 'water', name: 'B2' });
         const mockGameInstance = Game.mock.instances[0];
+        newGame.move();
 
         expect(mockGameInstance.move).toHaveBeenCalledTimes(1);
         //will add more logic here

@@ -1,4 +1,7 @@
-const { getAction } = require('../utils/prompts');;
+const { prompts, validators } = require('../utils');
+const getAction = prompts.getAction;
+const validateMove = validators.validateMove;
+
 
 module.exports = class Game {
     constructor(player, board, area) {
@@ -37,32 +40,7 @@ module.exports = class Game {
         let newArea;
         let currentArea = this.area.name;
 
-        const valid = (function checkValidMove(currentAreaY, currentAreaX, direction) {
-            if (index === 0) {
-                if (currentAreaY === 65) {
-                    if (direction === -1) {
-                        return false
-                    }
-                } else if (currentAreaY === 67) {
-                    if (direction === 1) {
-                        return false
-                    }
-                }
-            } else {
-                if (currentAreaX === 1) {
-                    if (direction === -1) {
-                        return false
-                    }
-
-                } else if (currentAreaX === 3) {
-                    if (direction === 1) {
-                        return false
-                    }
-                }
-            }
-
-            return true;
-        })(currentArea[0].charCodeAt(0), Number(currentArea[1]), direction);
+        const valid = validateMove(currentArea[0].charCodeAt(0), Number(currentArea[1]), index, direction);
 
         if (!valid) {
             console.log("\nYou can't move that way - you're at the edge of the map!\n");
