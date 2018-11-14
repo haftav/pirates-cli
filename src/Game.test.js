@@ -15,8 +15,8 @@ describe('Game.js tests', () => {
     });
     test('check start method call on class instance', () => {
         const newGame = new Game(new Player('Tav', 'B2'), areaData, { type: 'water', name: 'B2' });
-
         const mockGameInstance = Game.mock.instances[0];
+        
         mockGameInstance.start = jest.fn(() => mockGameInstance.loop())
         newGame.start();
 
