@@ -2,7 +2,6 @@ const { prompts, validators } = require('../utils');
 const getAction = prompts.getAction;
 const validateMove = validators.validateMove;
 
-
 module.exports = class Game {
     constructor(player, board, area) {
         this.player = player;
@@ -15,6 +14,10 @@ module.exports = class Game {
         this.loop();
     }
 
+    get currentArea() {
+        return this.area.name;
+    }
+
     async loop() {
         console.log('You are now at location: ', this.area.name, '\n');
         console.log(JSON.stringify(this.area) + "\n");
@@ -22,7 +25,7 @@ module.exports = class Game {
         let action = await getAction();
         // this.commandCenter(action[0])
         if (action[0] === 'move') {
-            this.move(action[1], action[2])
+            this.move(action[1], action[2], this.currentArea);
         }
         else if (action[0] === 'invalid') {
             console.log(action[1]);
@@ -35,10 +38,9 @@ module.exports = class Game {
         this.loop();
     }
 
-    move(index, direction) {
+    move(index, direction, currentArea) {
         //don't forget to change player pos as well
         let newArea;
-        let currentArea = this.area.name;
 
         const valid = validateMove(currentArea[0].charCodeAt(0), Number(currentArea[1]), index, direction);
 
@@ -46,25 +48,16 @@ module.exports = class Game {
             console.log("\nYou can't move that way - you're at the edge of the map!\n");
             return
         }
-
+        
         if (index === 0) {
-            if ((currentArea[0].charCodeAt(0) >= 65) && (currentArea[0].charCodeAt(0) <= 67)) {
                 newArea = String.fromCharCode(currentArea[0].charCodeAt(0) + (1 * direction)) + currentArea[1];
-            } else {
-                console.log("\nYou can't move that way - you're at the edge of the map!\n");
-                return
-            }
         } else {
-            if ((Number(currentArea[1]) >= 1) && (Number(currentArea[1]) <= 3)) {
                 newArea = currentArea[0] + (Number(currentArea[1]) + (1 * direction));
-            } else {
-                console.log("\nYou can't move that way - you're at the edge of the map!\n");
-                return
-            }
         }
         console.log('\nYou decided to move.\n');
         this.area = this.board[newArea];
         this.player.position = newArea;
+        return newArea;
     }
 
     end() {
