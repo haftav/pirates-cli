@@ -22,10 +22,17 @@ parseMove = function parseMove(move) {
     }
 }
 
+
 parseAction = function parseAction(action) {
     let moveRegex = /^move/gi
+    let lookRegex = /^look[ ]?$|^look around$/gi
     if (action.match(moveRegex)) {
         return parseMove(action);
+    }
+    else if (action.match(lookRegex)) {
+        return [
+            'look'
+        ]
     }
     else if (action === 'h' || action === 'help') {
         return [
@@ -44,4 +51,4 @@ parseAction = function parseAction(action) {
     }
 }
 
-module.exports = { parseMove, parseAction };
+module.exports = { parseAction, parseMove };

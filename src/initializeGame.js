@@ -26,18 +26,3 @@ async function initializeGame() {
 }
 
 module.exports = initializeGame;
-
-// function commandCenter(value, validations) {
-//     switch (value) {
-//         case 'help':
-//             return INSTRUCTIONS;
-//         case 'show score':
-//             return game.status;
-//         case 'q':
-//         case 'quit':
-//             console.log('\n\nGoodbye...');
-//             process.exit();
-//         default:
-//             return validations();
-//     }
-// }

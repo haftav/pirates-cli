@@ -23,9 +23,12 @@ module.exports = class Game {
         console.log(JSON.stringify(this.area) + "\n");
 
         let action = await getAction();
-        // this.commandCenter(action[0])
+        // this.commandCenter(action[0], this.instructions)
         if (action[0] === 'move') {
             this.move(action[1], action[2], this.currentArea);
+        }
+        else if (action[0] === 'look') {
+            this.look();
         }
         else if (action[0] === 'invalid') {
             console.log(action[1]);
@@ -60,21 +63,28 @@ module.exports = class Game {
         return newArea;
     }
 
+    look() {
+        console.log('\nYou look around the current area.\n');
+        return
+    }
+
     end() {
         console.log('\nThank you for playing!');
         process.exit();
     }
 
-    commandCenter(action) {
+    commandCenter(action, instructions) {
         switch (action[0]) {
             case 'help':
-                return this.instructions;
+                return instructions;
             case 'invalid':
                 return console.log(action[1]);
             case 'show score':
                 return;
             case 'move':
                 return this.move(action[1], action[2])
+            case 'look':
+                return this.look();
             case 'end':
                 return this.end();
             default:
