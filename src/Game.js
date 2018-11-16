@@ -1,34 +1,28 @@
-const { prompts, validators } = require('../utils');
+const { prompts } = require('../utils');
 const getAction = prompts.getAction;
-const validateMove = validators.validateMove;
 
 module.exports = class Game {
-    constructor(player, board, area) {
+    constructor(player, board) {
         this.player = player;
         this.board = board;
-        this.area = area;
     }
 
     start() {
         console.log('You look at the great seas all around you.\n');
         this.loop();
     }
-
-    get currentArea() {
-        return this.area.name;
-    }
-
     async loop() {
-        console.log('You are now at location: ', this.area.name, '\n');
-        console.log(JSON.stringify(this.area) + "\n");
+        console.log('You are now at location: ', this.currentArea.name, '\n');
+        console.log(JSON.stringify(this.currentArea) + "\n");
 
         let action = await getAction();
         // this.commandCenter(action[0], this.instructions)
         if (action[0] === 'move') {
-            this.move(action[1], action[2], this.currentArea);
+            // this.move(action[1], action[2], this.currentArea);
+            this.player.move(action[1], action[2], this.currentArea.name);
         }
         else if (action[0] === 'look') {
-            this.look();
+            this.player.look(this.currentArea);
         }
         else if (action[0] === 'invalid') {
             console.log(action[1]);
@@ -40,39 +34,14 @@ module.exports = class Game {
         }
         this.loop();
     }
-
-    move(index, direction, currentArea) {
-        //don't forget to change player pos as well
-        let newArea;
-
-        const valid = validateMove(currentArea[0].charCodeAt(0), Number(currentArea[1]), index, direction);
-
-        if (!valid) {
-            console.log("\nYou can't move that way - you're at the edge of the map!\n");
-            return
-        }
-        
-        if (index === 0) {
-                newArea = String.fromCharCode(currentArea[0].charCodeAt(0) + (1 * direction)) + currentArea[1];
-        } else {
-                newArea = currentArea[0] + (Number(currentArea[1]) + (1 * direction));
-        }
-        console.log('\nYou decided to move.\n');
-        this.area = this.board[newArea];
-        this.player.position = newArea;
-        return newArea;
+    get currentArea() {
+        // return this.area.name;
+        return this.board[this.player.position];
     }
-
-    look() {
-        console.log('\nYou look around the current area.\n');
-        return
-    }
-
     end() {
         console.log('\nThank you for playing!');
         process.exit();
     }
-
     commandCenter(action, instructions) {
         switch (action[0]) {
             case 'help':
