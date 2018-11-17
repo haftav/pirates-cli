@@ -7,6 +7,10 @@ module.exports = class Player {
         this.position = initialPosition;
     }
 
+    actionParser(action) {
+
+    }
+
     move(index, direction, currentArea) {
         let newArea;
 
