@@ -17,16 +17,14 @@ module.exports = class Game {
 
         try {
             if (this.gameActions.includes(action[0])) {
-                console.log("Game Action: ", action[0]);
                 this[action[0]](action, this.currentArea);
             } else if (this.playerActions.includes(action[0])) {
-                console.log("Player Action: ", action[0]);
-                this.player[action[0]](action, this.currentArea);
+                this.player[action[0]](action, this.currentArea)(this.board);
             } else {
                 console.log("\nI didn't quite catch that.\n");
             }
         } catch (error) {
-            console.log("\nThat function doesn't appear to exist.")
+            console.log("Invalid move.\n");
         }
         this.loop();
     }

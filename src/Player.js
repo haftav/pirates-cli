@@ -12,14 +12,13 @@ module.exports = class Player {
     }
     move(moveAction, currentArea) {
         let [action, index, direction] = moveAction;
-        console.log(index, direction);
         let newArea;
 
         const valid = validateMove(currentArea.name[0].charCodeAt(0), Number(currentArea.name[1]), index, direction);
 
         if (!valid) {
             console.log("\nYou can't move that way - you're at the edge of the map!\n");
-            return
+            return (() => {})();
         }
         
         if (index === 0) {
@@ -28,12 +27,17 @@ module.exports = class Player {
                 newArea = currentArea.name[0] + (Number(currentArea.name[1]) + (1 * direction));
         }
         this.position = newArea;
-        console.log('\nYou decided to move.\n');
-        console.log('You are now at location: ', this.position, '\n');
-        return newArea;
+        return function(board) {
+            console.log('\nYou decided to move.\n');
+            console.log('You are now at location: ', newArea, '\n');
+            console.log(board[newArea].description, "\n");
+            return newArea;
+        }
     }
     look(lookAction, currentArea) {
         console.log("\n", currentArea.description, "\n");
-        return;
+        return function() {
+            return;
+        }
     }
 }
