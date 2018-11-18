@@ -5,6 +5,8 @@ module.exports = class Game {
     constructor(player, board) {
         this.player = player;
         this.board = board;
+        this.gameActions = ['help', 'end', 'invalid'];
+        this.playerActions = ['look', 'move'];
     }
 
     start() {
@@ -16,48 +18,34 @@ module.exports = class Game {
         console.log(JSON.stringify(this.currentArea) + "\n");
 
         let action = await getAction();
-        // this.commandCenter(action[0], this.instructions)
-        if (action[0] === 'move') {
-            // this.move(action[1], action[2], this.currentArea);
-            this.player.move(action[1], action[2], this.currentArea.name);
+
+        try {
+            if (this.gameActions.includes(action[0])) {
+                console.log("Game Action");
+                this[action[0]](action, this.currentArea);
+            } else if (this.playerActions.includes(action[0])) {
+                console.log("Player Action");
+                this.player[action[0]](action, this.currentArea);
+            } else {
+                console.log("\nI didn't quite catch that.\n");
+            }
+        } catch (error) {
+            console.log("\nThat function doesn't appear to exist.")
         }
-        else if (action[0] === 'look') {
-            this.player.look(this.currentArea);
-        }
-        else if (action[0] === 'invalid') {
-            console.log(action[1]);
-        }
-        else if (action[0] === 'end') {
-            return this.end();
-        } else {
-            console.log("\nI didn't quite catch that.\n");
-        }
+
         this.loop();
     }
     get currentArea() {
-        // return this.area.name;
         return this.board[this.player.position];
     }
+
+    invalid() {
+        console.log("\nThat input is invalid. Please input a valid response.");
+    }
+
     end() {
         console.log('\nThank you for playing!');
         process.exit();
     }
-    commandCenter(action, instructions) {
-        switch (action[0]) {
-            case 'help':
-                return instructions;
-            case 'invalid':
-                return console.log(action[1]);
-            case 'show score':
-                return;
-            case 'move':
-                return this.move(action[1], action[2])
-            case 'look':
-                return this.look();
-            case 'end':
-                return this.end();
-            default:
-                return console.log("\nI didn't quite catch that.\n");
-        }
-    }
+
 };

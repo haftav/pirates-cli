@@ -8,14 +8,14 @@ function getAction() {
             name: 'action',
             message: 'What would you like to do?',
             transformer: function(input, answers, flags) {
-                return input.toLowerCase().trim();
+                return input.toLowerCase();
             }
         }
     ];
     
     return inquirer.prompt(questions).then((answers) => {
-        // answers.split(' ');
-        return parseAction(answers.action);
+        let output = answers.action.split(' ');
+        return parseAction(output);
     })
 }
 

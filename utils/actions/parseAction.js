@@ -1,45 +1,22 @@
-parseMove = function parseMove(move) {
-    let directions = ['north', 'south', 'east', 'west'];
-    let direction = move.split(' ')[1];
-    let amount = move.split(' ')[0];
-    if (directions.includes(direction)) {
-        /*
-        If the move input is valid, 
-        return an array with the first item 
-        as the action to take, the second as the index of the area code
-        to modify, and the third as the direction to take
-        **/
-        return [
-            'move',
-            (direction === 'north' || direction === 'south' ? 0 : 1),
-            (direction === 'north' || direction === 'west' ? -1 : 1),
-        ];
-    } else {
-        return [
-            'invalid',
-            '\nPlease enter a valid direction.\n'
-        ];
-    }
-}
+const parseMove = require('./parseAction/parseMove');
 
-
-parseAction = function parseAction(action) {
+parseAction = function parseAction([primaryAction, secondaryAction, tertiaryAction]) {
     let moveRegex = /^move/gi
     let lookRegex = /^look[ ]?$|^look around$/gi
-    if (action.match(moveRegex)) {
-        return parseMove(action);
+    if (primaryAction.match(moveRegex)) {
+        return parseMove([secondaryAction, tertiaryAction]);
     }
-    else if (action.match(lookRegex)) {
+    else if (primaryAction.match(lookRegex)) {
         return [
             'look'
         ]
     }
-    else if (action === 'h' || action === 'help') {
+    else if (primaryAction === 'h' || primaryAction === 'help') {
         return [
             'help'
         ]
     }
-    else if (action === 'end' || action === 'end game' || action === 'quit' || action === 'q') {
+    else if (primaryAction === 'end' || primaryAction === 'end game' || primaryAction === 'quit' || primaryAction === 'q') {
         return [
             'end'
         ];

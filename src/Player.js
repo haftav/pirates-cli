@@ -1,20 +1,22 @@
-const { validators } = require('../utils');
+const { validators, prompts } = require('../utils');
 const validateMove = validators.validateMove;
+const getAction = prompts.getAction;
 
 module.exports = class Player {
     constructor(name, initialPosition) {
         this.name = name;
         this.position = initialPosition;
+
+        this.move = this.move.bind(this);
+        this.look = this.look.bind(this);
     }
 
-    actionParser(action) {
-
-    }
-
-    move(index, direction, currentArea) {
+    move(moveAction, currentArea) {
+        let [action, index, direction] = moveAction;
+        console.log(index, direction);
         let newArea;
 
-        const valid = validateMove(currentArea[0].charCodeAt(0), Number(currentArea[1]), index, direction);
+        const valid = validateMove(currentArea.name[0].charCodeAt(0), Number(currentArea.name[1]), index, direction);
 
         if (!valid) {
             console.log("\nYou can't move that way - you're at the edge of the map!\n");
@@ -22,16 +24,16 @@ module.exports = class Player {
         }
         
         if (index === 0) {
-                newArea = String.fromCharCode(currentArea[0].charCodeAt(0) + (1 * direction)) + currentArea[1];
+                newArea = String.fromCharCode(currentArea.name[0].charCodeAt(0) + (1 * direction)) + currentArea.name[1];
         } else {
-                newArea = currentArea[0] + (Number(currentArea[1]) + (1 * direction));
+                newArea = currentArea.name[0] + (Number(currentArea.name[1]) + (1 * direction));
         }
         console.log('\nYou decided to move.\n');
         this.position = newArea;
         return newArea;
     }
-    look(area) {
-        console.log("\n", area.description, "\n");
+    look(lookAction, currentArea) {
+        console.log("\n", currentArea.description, "\n");
         return;
     }
 }
