@@ -10,7 +10,6 @@ module.exports = class Player {
         this.move = this.move.bind(this);
         this.look = this.look.bind(this);
     }
-
     move(moveAction, currentArea) {
         let [action, index, direction] = moveAction;
         console.log(index, direction);
@@ -28,8 +27,9 @@ module.exports = class Player {
         } else {
                 newArea = currentArea.name[0] + (Number(currentArea.name[1]) + (1 * direction));
         }
-        console.log('\nYou decided to move.\n');
         this.position = newArea;
+        console.log('\nYou decided to move.\n');
+        console.log('You are now at location: ', this.position, '\n');
         return newArea;
     }
     look(lookAction, currentArea) {
