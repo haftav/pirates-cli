@@ -2,6 +2,7 @@ const parseMove = require('./parseAction/parseMove');
 
 parseAction = function parseAction([primaryAction, secondaryAction, tertiaryAction]) {
     let moveRegex = /^move/gi
+    let claimRegex = /^claim/gi
     let lookRegex = /^look[ ]?$|^look around$/gi
     if (primaryAction.match(moveRegex)) {
         return parseMove([secondaryAction, tertiaryAction]);
@@ -9,6 +10,11 @@ parseAction = function parseAction([primaryAction, secondaryAction, tertiaryActi
     else if (primaryAction.match(lookRegex)) {
         return [
             'look'
+        ]
+    }
+    else if (primaryAction.match(claimRegex)) {
+        return [
+            'claim'
         ]
     }
     else if (primaryAction === 'h' || primaryAction === 'help') {

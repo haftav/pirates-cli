@@ -6,7 +6,7 @@ module.exports = class Game {
         this.player = player;
         this.board = board;
         this.gameActions = ['help', 'end', 'invalid'];
-        this.playerActions = ['look', 'move'];
+        this.playerActions = ['look', 'move', 'claim'];
     }
     start() {
         console.log('You are now at location: ', this.currentArea.name, '\n');
@@ -19,12 +19,12 @@ module.exports = class Game {
             if (this.gameActions.includes(action[0])) {
                 this[action[0]](action, this.currentArea);
             } else if (this.playerActions.includes(action[0])) {
-                this.player[action[0]](action, this.currentArea)(this.board);
+                this.player[action[0]](action, this.currentArea, this.board);
             } else {
                 console.log("\nI didn't quite catch that.\n");
             }
         } catch (error) {
-            console.log("Invalid move.\n");
+            console.log("Invalid move.\n", error);
         }
         this.loop();
     }
