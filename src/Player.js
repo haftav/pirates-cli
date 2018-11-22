@@ -1,6 +1,5 @@
 const { validators, prompts } = require('../utils');
 const validateMove = validators.validateMove;
-const getAction = prompts.getAction;
 
 module.exports = class Player {
     constructor(name, initialPosition, ship=null) {
@@ -28,20 +27,30 @@ module.exports = class Player {
         } else {
                 newArea = currentArea.name[0] + (Number(currentArea.name[1]) + (1 * direction));
         }
-        this.position = newArea;
 
-        console.log('\nYou decided to move.\n');
-        console.log('You are now at location: ', newArea, '\n');
-        console.log(board[newArea].description, "\n");
-        return newArea;
+        if (board[newArea].type === 'water' && !this.ship) {
+            console.log("\nYou can't travel by sea without a ship\n");
+
+        } else {
+            this.position = newArea;
+            console.log('\nYou decided to move.\n');
+            console.log('You are now at location: ', newArea, '\n');
+            console.log(board[newArea].description, "\n");
+            return newArea;
+        }
 
     }
     look(lookAction, currentArea, board) {
         console.log("\n", currentArea.description, "\n");
     }
     claim(claimAction, currentArea, board) {
+        if (this.ship) {
+
+            return
+        }
         if (currentArea.ship) {
             this.ship = currentArea.ship;
+            currentArea.ship = null;
             console.log("You claimed the lovely ship", this.ship.name, "\n");
             return
 

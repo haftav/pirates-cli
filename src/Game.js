@@ -7,6 +7,7 @@ module.exports = class Game {
         this.board = board;
         this.gameActions = ['help', 'end', 'invalid'];
         this.playerActions = ['look', 'move', 'claim'];
+        this.shipActions = [];
     }
     start() {
         console.log('You are now at location: ', this.currentArea.name, '\n');
