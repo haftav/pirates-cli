@@ -1,8 +1,8 @@
 module.exports = class Area {
-    constructor({type, name, description, objects, ship}) {
+    constructor({type, name, describe, objects, ship}) {
         this.type = type;
         this.name = name;
-        this.description = description;
+        this.describe = describe;
         this.objects = objects;
         this.ship = ship;
     }

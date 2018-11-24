@@ -35,17 +35,17 @@ module.exports = class Player {
             this.position = newArea;
             console.log('\nYou decided to move.\n');
             console.log('You are now at location: ', newArea, '\n');
-            console.log(board[newArea].description, "\n");
+            board[newArea].describe();
             return newArea;
         }
 
     }
     look(lookAction, currentArea, board) {
-        console.log("\n", currentArea.description, "\n");
+        currentArea.describe();
     }
     claim(claimAction, currentArea, board) {
         if (this.ship) {
-
+            console.log("You already have a ship.\n");
             return
         }
         if (currentArea.ship) {
@@ -55,7 +55,7 @@ module.exports = class Player {
             return
 
         } else {
-            console.log("There's nothing to claim here.\n")
+            console.log("There's nothing to claim here.\n");
             return
         }
 

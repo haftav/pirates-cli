@@ -10,7 +10,7 @@ module.exports = class Game {
         this.shipActions = [];
     }
     start() {
-        console.log('You are now at location: ', this.currentArea.name, '\n');
+        this.currentArea.describe();
         this.loop();
     }
     async loop() {

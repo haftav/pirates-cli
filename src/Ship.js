@@ -1,7 +1,7 @@
 
 
 module.exports = class Ship {
-    constructor(name) {
+    constructor(name, position) {
         this.name = name;
     }
 

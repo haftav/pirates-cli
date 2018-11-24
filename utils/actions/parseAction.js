@@ -1,8 +1,8 @@
 const parseMove = require('./parseAction/parseMove');
 
 parseAction = function parseAction([primaryAction, secondaryAction, tertiaryAction]) {
-    let moveRegex = /^move/gi
-    let claimRegex = /^claim/gi
+    let moveRegex = /^move|^go/gi
+    let claimRegex = /^claim|^take/gi
     let lookRegex = /^look[ ]?$|^look around$/gi
     if (primaryAction.match(moveRegex)) {
         return parseMove([secondaryAction, tertiaryAction]);
