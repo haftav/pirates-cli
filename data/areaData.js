@@ -14,7 +14,7 @@ const areaData = {
         type: "water",
         name: "A2",
         describe: function() {
-            console.log("You are surrounded by water.\n");
+            console.log("You are surrounded by water. It looks like there's land to the east!\n");
         },
         objects: [],
         ship: null
@@ -23,16 +23,23 @@ const areaData = {
         type: "land",
         name: "A3",
         describe: function() {
-            console.log("You are on an island.\n");
+            let item = this.objects.find(function(el) {
+                return el.name === 'key'
+            })
+            if (item) {
+                console.log("You are on an island. There's something shiny on the ground in front of you.\n");
+            } else {
+                console.log("You are on a deserted island.")
+            }
         },
-        objects: [],
+        objects: [{name: 'key'}],
         ship: null
     },
     "B1": {
         type: "water",
         name: "B1",
         describe: function() {
-            console.log("You are surrounded by water.\n");
+            console.log("You are surrounded by water on all sides except the west - there is a giant wall there!.\n");
         },
         objects: [],
         ship: null

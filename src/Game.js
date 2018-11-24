@@ -6,7 +6,7 @@ module.exports = class Game {
         this.player = player;
         this.board = board;
         this.gameActions = ['help', 'end', 'invalid'];
-        this.playerActions = ['look', 'move', 'claim'];
+        this.playerActions = ['look', 'move', 'claim', 'check'];
         this.shipActions = [];
     }
     start() {

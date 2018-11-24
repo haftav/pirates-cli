@@ -14,12 +14,18 @@ parseAction = function parseAction([primaryAction, secondaryAction, tertiaryActi
     }
     else if (primaryAction.match(claimRegex)) {
         return [
-            'claim'
+            'claim',
+            secondaryAction
         ]
     }
     else if (primaryAction === 'h' || primaryAction === 'help') {
         return [
             'help'
+        ]
+    }
+    else if (primaryAction === 'check') {
+        return [
+            'check'
         ]
     }
     else if (primaryAction === 'end' || primaryAction === 'end game' || primaryAction === 'quit' || primaryAction === 'q') {
