@@ -59,10 +59,10 @@ describe('parseAction tests', () => {
         expect(parseAction(['end game'])).toEqual(expect.arrayContaining(['end']))
     });
     test('invalid input should return invalid output', () => {
-        expect(parseAction(['movewest'])).toEqual(expect.arrayContaining(['invalid', '\nPlease enter a valid direction.\n']));
-        expect(parseAction(['move'])).toEqual(expect.arrayContaining(['invalid', '\nPlease enter a valid direction.\n']));
-        expect(parseAction([''])).toEqual(expect.arrayContaining(['invalid', '\nPlease enter a valid response.\n']));
-        expect(parseAction(['wlwegja;'])).toEqual(expect.arrayContaining(['invalid', '\nPlease enter a valid response.\n']));
+        expect(parseAction(['movewest'])).toEqual(expect.arrayContaining(['invalid', 'Please enter a valid direction.\n']));
+        expect(parseAction(['move'])).toEqual(expect.arrayContaining(['invalid', 'Please enter a valid direction.\n']));
+        expect(parseAction([''])).toEqual(expect.arrayContaining(['invalid', 'Please enter a valid response.\n']));
+        expect(parseAction(['wlwegja;'])).toEqual(expect.arrayContaining(['invalid', 'Please enter a valid response.\n']));
     });
 })
 
