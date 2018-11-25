@@ -18,7 +18,7 @@ function createBoard(data) {
 
 async function initializeGame() {
     USERNAME = await prompts.getName();
-    console.log(`\nYour name is ${USERNAME}? A fine name indeed.\n`);
+    console.log(`Your name is ${USERNAME}? A fine name indeed.\n`);
     BOARD = createBoard(areaData);
     const NewPlayer = new Player(USERNAME, INITIAL_POSITION);
     const NewGame = new Game(NewPlayer, BOARD);

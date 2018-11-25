@@ -10,6 +10,7 @@ function getName() {
     ];
 
     return inquirer.prompt(questions).then((answers) => {
+        console.log('');
         return answers.name;
     })
 }

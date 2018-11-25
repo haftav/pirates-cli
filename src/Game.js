@@ -22,7 +22,7 @@ module.exports = class Game {
             } else if (this.playerActions.includes(action[0])) {
                 this.player[action[0]](action, this.currentArea, this.board);
             } else {
-                console.log("\nI didn't quite catch that.\n");
+                console.log("I didn't quite catch that.\n");
             }
         } catch (error) {
             console.log("Invalid move.\n", error);
@@ -33,10 +33,10 @@ module.exports = class Game {
         return this.board[this.player.position];
     }
     invalid() {
-        console.log("\nThat input is invalid. Please input a valid response.");
+        console.log("That input is invalid. Please input a valid response.\n");
     }
     end() {
-        console.log('\nThank you for playing!');
+        console.log('Thank you for playing!');
         process.exit();
     }
 };

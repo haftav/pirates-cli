@@ -17,7 +17,7 @@ parseMove = function parseMove([secondary, tertiary]) {
     } else {
         return [
             'invalid',
-            '\nPlease enter a valid direction.\n'
+            'Please enter a valid direction.\n'
         ];
     }
 }

@@ -7,7 +7,7 @@ const areaData = {
         describe: function() {
             console.log("You are surrounded by water.\n");
         },
-        objects: [],
+        objects: {},
         ship: null
     },
     "A2": {
@@ -16,23 +16,24 @@ const areaData = {
         describe: function() {
             console.log("You are surrounded by water. It looks like there's land to the east!\n");
         },
-        objects: [],
+        objects: {},
         ship: null
     },
     "A3": {
         type: "land",
         name: "A3",
         describe: function() {
-            let item = this.objects.find(function(el) {
-                return el.name === 'key'
-            })
-            if (item) {
+            if (this.objects.key) {
                 console.log("You are on an island. There's something shiny on the ground in front of you.\n");
             } else {
                 console.log("You are on a deserted island.")
             }
         },
-        objects: [{name: 'key'}],
+        objects: {
+            key: {
+                name: 'key',
+            }
+        },
         ship: null
     },
     "B1": {
@@ -41,7 +42,7 @@ const areaData = {
         describe: function() {
             console.log("You are surrounded by water on all sides except the west - there is a giant wall there!.\n");
         },
-        objects: [],
+        objects: {},
         ship: null
     },
     "B2": {
@@ -54,7 +55,7 @@ const areaData = {
                 console.log("You are on a deserted island. Ocean surrounds you in all directions.\n")
             }
         },
-        objects: [],
+        objects: {},
         ship: new Ship('Messi', 'B2'),
     },
     "B3": {
@@ -63,7 +64,7 @@ const areaData = {
         describe: function() {
             console.log("You are surrounded by water.\n");
         },
-        objects: [],
+        objects: {},
         ship: null
     },
     "C1": {
@@ -72,7 +73,7 @@ const areaData = {
         describe: function() {
             console.log("You are surrounded by water.\n");
         },
-        objects: [],
+        objects: {},
         ship: null
     },
     "C2": {
@@ -81,7 +82,7 @@ const areaData = {
         describe: function() {
             console.log("You are surrounded by water.\n");
         },
-        objects: [],
+        objects: {},
         ship: null
     },
     "C3": {
@@ -90,7 +91,7 @@ const areaData = {
         describe: function() {
             console.log("You are surrounded by water.\n");
         },
-        objects: [],
+        objects: {},
         ship: null
     },
 }

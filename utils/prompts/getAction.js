@@ -14,6 +14,7 @@ function getAction() {
     ];
     
     return inquirer.prompt(questions).then((answers) => {
+        console.log('');
         let output = answers.action.split(' ');
         return parseAction(output);
     })

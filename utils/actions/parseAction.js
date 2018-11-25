@@ -35,7 +35,7 @@ parseAction = function parseAction([primaryAction, secondaryAction, tertiaryActi
     } else {
         return [
             'invalid',
-            '\nPlease enter a valid response.\n'
+            'Please enter a valid response.\n'
         ];
     }
 }

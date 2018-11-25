@@ -20,7 +20,7 @@ module.exports = class Player {
         const valid = validateMove(currentArea.name[0].charCodeAt(0), Number(currentArea.name[1]), index, direction);
 
         if (!valid) {
-            console.log("\nYou can't move that way - you're at the edge of the map!\n");
+            console.log("You can't move that way - you're at the edge of the map!\n");
             return (() => {})();
         }
         
@@ -31,11 +31,11 @@ module.exports = class Player {
         }
 
         if (board[newArea].type === 'water' && !this.ship) {
-            console.log("\nYou can't travel by sea without a ship\n");
+            console.log("You can't travel by sea without a ship\n");
 
         } else {
             this.position = newArea;
-            console.log('\nYou decided to move.\n');
+            console.log('You decided to move.\n');
             console.log('You are now at location: ', newArea, '\n');
             board[newArea].describe();
             return newArea;
@@ -58,19 +58,15 @@ module.exports = class Player {
             } 
         }
         else if (claimAction[1] === 'key') {
-            let key = currentArea.objects.find(function(el) {
-                return el.name === 'key'
-            });
+            let key = currentArea.objects.key;
             if (key) {
                 let newInventory = {...this.inventory, key}
                 this.inventory = newInventory;
-                let index = currentArea.objects.findIndex(function(el) {
-                   return el.name === 'key';
-                });
-                let newObjects = currentArea.objects.slice(0);
-                newObjects.splice(index, 1);
+
+                let newObjects = currentArea.objects;
+                delete newObjects.key;
                 currentArea.objects = newObjects;
-                console.log("Your inventory is now: ", this.inventory)
+                console.log("Your inventory is now: ", this.inventory, "\n");
             } else {
                 console.log("There's no key in this area.\n");
             }
@@ -82,7 +78,6 @@ module.exports = class Player {
             console.log("There's nothing to claim here.\n");
             return
         }
-
     }
     check() {
         console.log("Here is your inventory: \n", this.inventory, "\n");
