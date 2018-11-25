@@ -18,7 +18,7 @@ module.exports = class Game {
 
         try {
             if (this.gameActions.includes(action[0])) {
-                this[action[0]](action, this.currentArea);
+                this[action[0]](action);
             } else if (this.playerActions.includes(action[0])) {
                 this.player[action[0]](action, this.currentArea, this.board);
             } else {
@@ -32,8 +32,8 @@ module.exports = class Game {
     get currentArea() {
         return this.board[this.player.position];
     }
-    invalid() {
-        console.log("That input is invalid. Please input a valid response.\n");
+    invalid(action) {
+        console.log("That input is invalid.", action[1]);
     }
     end() {
         console.log('Thank you for playing!');
