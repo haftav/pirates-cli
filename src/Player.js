@@ -45,6 +45,9 @@ module.exports = class Player {
     look(lookAction, currentArea, board) {
         currentArea.describe();
     }
+
+    //claim logic currently allows any object to be taken. I need to refactor this
+
     claim(claimAction, currentArea, board) {
         if (!claimAction[1]) {
             console.log("Please say what you're trying to claim.\n");
