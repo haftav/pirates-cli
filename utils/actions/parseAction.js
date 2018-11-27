@@ -4,6 +4,10 @@ parseAction = function parseAction([primaryAction, secondaryAction, tertiaryActi
     let moveRegex = /^move|^go/gi
     let claimRegex = /^claim|^take/gi
     let lookRegex = /^look[ ]?$|^look around$/gi
+
+    let openRegex = /^open/gi
+    let inspectRegex = /^inspect/gi
+
     if (primaryAction.match(moveRegex)) {
         return parseMove([secondaryAction, tertiaryAction]);
     }
@@ -15,6 +19,18 @@ parseAction = function parseAction([primaryAction, secondaryAction, tertiaryActi
     else if (primaryAction.match(claimRegex)) {
         return [
             'claim',
+            secondaryAction
+        ]
+    }
+    else if (primaryAction.match(openRegex)) {
+        return [
+            'open',
+            secondaryAction
+        ]
+    }
+    else if (primaryAction.match(inspectRegex)) {
+        return [
+            'describe',
             secondaryAction
         ]
     }

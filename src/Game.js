@@ -7,6 +7,7 @@ module.exports = class Game {
         this.board = board;
         this.gameActions = ['help', 'end', 'invalid'];
         this.playerActions = ['look', 'move', 'claim', 'check'];
+        this.interactions = ['open', 'describe']
         this.shipActions = [];
     }
     start() {
@@ -19,9 +20,24 @@ module.exports = class Game {
         try {
             if (this.gameActions.includes(action[0])) {
                 this[action[0]](action);
-            } else if (this.playerActions.includes(action[0])) {
+            } 
+            else if (this.playerActions.includes(action[0])) {
                 this.player[action[0]](action, this.currentArea, this.board);
-            } else {
+            } 
+            else if (this.interactions.includes(action[0])) {
+                //Interactions with objects should be doable for both objects in the
+                //currentArea as well as objects in the player's inventory.
+                if (this.currentArea.objects[action[1]]) {
+                    this.currentArea.objects[action[1]][action[0]](action, this.player);
+                } 
+                else if (this.player.inventory[action[1]]) {
+                    this.player.inventory[action[1]][action[0]](action, this.player)
+                }
+                else {
+                    console.log("Please enter a valid action.\n");
+                }
+            }
+            else {
                 console.log("I didn't quite catch that.\n");
             }
         } catch (error) {
@@ -33,7 +49,7 @@ module.exports = class Game {
         return this.board[this.player.position];
     }
     invalid(action) {
-        console.log("That input is invalid.", action[1]);
+        console.log("That input is invalid.", action[1], "\n");
     }
     end() {
         console.log('Thank you for playing!');
