@@ -1,5 +1,6 @@
 const Ship = require('../src/Ship');
 const Chest = require('../src/Chest');
+const Key = require('../src/Key');
 
 const areaData = {
     "A1": {
@@ -31,9 +32,7 @@ const areaData = {
             }
         },
         objects: {
-            key: {
-                name: 'key',
-            }
+            key: new Key(),
         },
         ship: null
     },
@@ -50,14 +49,15 @@ const areaData = {
         type: "water",
         name: "B2",
         describe: function() {
-            if (this.ship) {
+            if (this.objects.ship) {
                 console.log("You find yourself on a deserted island. There is a ship on the beach in front of you. You look in all directions but only see ocean.\n")
             } else {
                 console.log("You are on a deserted island. Ocean surrounds you in all directions.\n")
             }
         },
-        objects: {},
-        ship: new Ship('Messi', 'B2'),
+        objects: {
+            ship: new Ship('Messi', 'B2'),
+        },
     },
     "B3": {
         type: "water",

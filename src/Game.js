@@ -6,8 +6,8 @@ module.exports = class Game {
         this.player = player;
         this.board = board;
         this.gameActions = ['help', 'end', 'invalid'];
-        this.playerActions = ['look', 'move', 'claim', 'check'];
-        this.interactions = ['open', 'describe']
+        this.playerActions = ['look', 'move', 'check'];
+        this.interactions = ['open', 'describe', 'claim']
         this.shipActions = [];
     }
     start() {
@@ -28,10 +28,12 @@ module.exports = class Game {
                 //Interactions with objects should be doable for both objects in the
                 //currentArea as well as objects in the player's inventory.
                 if (this.currentArea.objects[action[1]]) {
-                    this.currentArea.objects[action[1]][action[0]](action, this.player);
-                } 
+                    this.currentArea.objects[action[1]][action[0]](action, this.currentArea, this.player);
+                }
                 else if (this.player.inventory[action[1]]) {
-                    this.player.inventory[action[1]][action[0]](action, this.player)
+                    this.player.inventory[action[1]][action[0]](action, this.currentArea, this.player)
+                } else if (!action[1]) {
+                    console.log("What are you trying to", action[0] + "?\n");
                 }
                 else {
                     console.log("Please enter a valid action.\n");

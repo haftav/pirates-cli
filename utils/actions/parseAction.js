@@ -4,7 +4,6 @@ parseAction = function parseAction([primaryAction, secondaryAction, tertiaryActi
     let moveRegex = /^move|^go/gi
     let claimRegex = /^claim|^take/gi
     let lookRegex = /^look[ ]?$|^look around$/gi
-
     let openRegex = /^open/gi
     let inspectRegex = /^inspect/gi
 
