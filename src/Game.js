@@ -49,7 +49,7 @@ module.exports = class Game {
         return this.board[this.player.position];
     }
     invalid(action) {
-        console.log("That input is invalid.", action[1], "\n");
+        console.log("That input is invalid.", action[1]);
     }
     end() {
         console.log('Thank you for playing!');
