@@ -24,8 +24,13 @@ module.exports = class Chest {
             console.log("You already opened this!\n");
         }
         else if (player.inventory.key) {
+            let chestGold = this.gold;
+            let newGold = player.inventory.gold += chestGold;
+            player.inventory.gold = newGold;
+            this.gold = 0;
             this.opened = true;
-            console.log("You opened the chest!\n");
+            console.log("You opened the chest!");
+            console.log(`You add ${chestGold} gold to your inventory. \n`);
         } else {
             console.log("You can't open a chest without a key.\n");
         }

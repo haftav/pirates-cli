@@ -6,7 +6,9 @@ module.exports = class Player {
         this.name = name;
         this.position = initialPosition;
         this.ship = ship;
-        this.inventory = {}
+        this.inventory = {
+            gold: 0
+        };
 
         this.move = this.move.bind(this);
         this.look = this.look.bind(this);

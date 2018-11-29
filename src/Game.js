@@ -33,7 +33,7 @@ module.exports = class Game {
                 else if (this.player.inventory[action[1]]) {
                     this.player.inventory[action[1]][action[0]](action, this.currentArea, this.player)
                 } else if (!action[1]) {
-                    console.log("What are you trying to", action[0] + "?\n");
+                    console.log("Please provide a second argument.\n");
                 }
                 else {
                     console.log("Please enter a valid action.\n");
