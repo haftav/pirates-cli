@@ -37,6 +37,16 @@ module.exports = class Chest {
         return
     }
 
+    drop(action, currentArea, player) {
+        let newInventory = { ...player.inventory };
+        let newObjects = { ...currentArea.objects, [action[1]]: this };
+
+        delete newInventory[action[1]];
+
+        currentArea.objects = newObjects;
+        player.inventory = newInventory;
+    }
+
     describe(action, currentArea, player) {
         if (this.opened) {
             console.log("An empty chest.\n");

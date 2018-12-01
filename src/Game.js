@@ -7,7 +7,8 @@ module.exports = class Game {
         this.board = board;
         this.gameActions = ['help', 'end', 'invalid'];
         this.playerActions = ['look', 'move', 'check'];
-        this.interactions = ['open', 'describe', 'claim']
+        this.areaActions = ['open', 'describe', 'claim'];
+        this.inventoryActions = ['open', 'describe', 'drop'];
         this.shipActions = [];
     }
     start() {
@@ -16,7 +17,6 @@ module.exports = class Game {
     }
     async loop() {
         let action = await getAction();
-
         try {
             if (this.gameActions.includes(action[0])) {
                 this[action[0]](action);
@@ -24,9 +24,7 @@ module.exports = class Game {
             else if (this.playerActions.includes(action[0])) {
                 this.player[action[0]](action, this.currentArea, this.board);
             } 
-            else if (this.interactions.includes(action[0])) {
-                //Interactions with objects should be doable for both objects in the
-                //currentArea as well as objects in the player's inventory.
+            else if (this.areaActions.includes(action[0]) || this.inventoryActions.includes(action[0])) {
                 if (this.currentArea.objects[action[1]]) {
                     this.currentArea.objects[action[1]][action[0]](action, this.currentArea, this.player);
                 }
